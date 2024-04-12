@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
+'''The module provides function definition to generate pascal's triangles'''
 
 def pascal_triangle(n):
+    '''Generates a pascal's triangle with <n> height'''
     if (n <= 0):
         return []
     triangle = [[1]]
