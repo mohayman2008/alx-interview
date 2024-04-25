@@ -11,6 +11,10 @@ def minOperations(n: int, initialVal: int = 1, buf: int = 0) -> int:
     "Copy All" and "Paste" operations'''
     if n <= 1:
         return 0
+    elif buf == 0:
+        if n == 2:
+            return 2
+        return 2 + minOperations(n, 2 * initialVal, initialVal)
 
     remainder = n - initialVal
     if buf > remainder:
@@ -21,7 +25,7 @@ def minOperations(n: int, initialVal: int = 1, buf: int = 0) -> int:
         return 2
 
     # Adding buffer (Just pasting without CopyAll)
-    ops_adding = minOperations(n, initialVal + buf, buf) if buf > 0 else -1
+    ops_adding = minOperations(n, initialVal + buf, buf)  # if buf > 0 else -1
     # Doubling: costs 2 operations (CopyAll and Paste)
     ops_doubling = minOperations(n, 2 * initialVal, initialVal)
 
