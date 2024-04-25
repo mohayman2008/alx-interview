@@ -9,7 +9,7 @@ def minOperations(n: int, initialVal: int = 1, buf: int = 0) -> int:
     '''The function calculate the minimum required operations to reach a given
     number of characters starting from a single character and only using
     "Copy All" and "Paste" operations'''
-    if n <= 1:
+    if type(n) != int or n <= 1:
         return 0
     elif buf == 0:
         if n == 2:
