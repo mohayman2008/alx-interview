@@ -2,7 +2,6 @@
 '''The module provides function definition to calculate the minimum required
 operations to reach a given number of characters starting from a single
 character and only using "Copy All" and "Paste" operations'''
-from __future__ import annotations
 
 
 def minOperations(n: int) -> int:
@@ -14,10 +13,9 @@ def minOperations(n: int) -> int:
     if n == 2:
         return 2
 
-    numOps: int = 2
-    completed: int = 2
-    clipboard: int = 1
-    remaining: int
+    numOps = 2
+    completed = 2
+    clipboard = 1
 
     while n > completed:
         remaining = n - completed
