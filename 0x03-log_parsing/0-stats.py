@@ -34,7 +34,8 @@ def print_stats(sc_count, file_size):
 
 def main():
     '''main: entry point'''
-    pattern = r".+ - \[.+\] \"GET /projects/260 HTTP/1.1\" (.+) (.+)\s"
+    pattern = r".+\s*-\s*\[.+\]\s*\"GET /projects/260 HTTP/1.1\"\s+(.+)\s+"
+    pattern += r"(.+)\s*"
     line_fmt = re.compile(pattern)
 
     sc_fmt = re.compile(r"[0-9]+")
@@ -61,7 +62,7 @@ def main():
             if count % 10 == 0:
                 print_stats(sc_count, file_size)
 
-        if count % 10:
+        if count == 0 or count % 10:
             print_stats(sc_count, file_size)
 
     except KeyboardInterrupt as e:
