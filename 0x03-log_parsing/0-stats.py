@@ -23,9 +23,9 @@ from sys import stdin, stdout
 
 def print_stats(sc_count, file_size):
     '''Print the stats according to the predifined output format'''
-    buffer = f"File size: {file_size}\n"
+    buffer = "File size: {}\n".format(file_size)
     for key in sorted(sc_count.keys()):
-        buffer += f"{key}: {sc_count[key]}\n"
+        buffer += "{}: {}\n".format(key, sc_count[key])
 
     print(buffer, end='')
     # stdout.write(buffer)
