@@ -18,14 +18,16 @@ def validUTF8(data):
         if data[i] < 128:
             i += 1
             continue
-        elif not (192 <= data[i] <= 244):
+
+        # elif not (192 <= data[i] <= 244):
+        elif not (192 <= data[i] < 248):
             # 10xx xxxx (invalid for the first char byte) or
             # 1111 1xxx (char > 4 bytes long) or
             # 1111 01xx where x != 0
             return False
 
-        if data[i] == 244:  # 1111 0100
-            c = 3
+        # if data[i] == 244:  # 1111 0100
+        #     c = 3
             # if i >= length - 1:
             #     return False
             # i += 1
