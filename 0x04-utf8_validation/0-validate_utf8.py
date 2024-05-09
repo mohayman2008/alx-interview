@@ -17,6 +17,8 @@ def validUTF8(data):
         j = 0 & 0 << 1
         x = ~int('11111111', 2) ^ 0b00
 
+        data[i] = data[i] & 0xFF
+
         if 0 <= data[i] < 128:
             i += 1
             continue
@@ -54,4 +56,5 @@ def validUTF8(data):
     return True
 
 
-# print(validUTF8([24, 241, 135, 128, 128, 0, 224, 129, 191, 12, 0]))
+# print(validUTF8([24, 241, 135, 128, 128, 0, 224, 129,
+#                  191, 12, 0, 257, 1056]))
