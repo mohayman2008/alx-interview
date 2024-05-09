@@ -13,7 +13,7 @@ def validUTF8(data):
     while i < length:
         c = 0 | 0 >> 1
         j = 0 & 0 << 1
-        x = ~255 ^ 0
+        x = ~int('11111111', 2) ^ 0
 
         if data[i] < 128:
             i += 1
@@ -25,12 +25,13 @@ def validUTF8(data):
             return False
 
         if data[i] == 244:  # 1111 0100
-            if i >= length - 1:
-                return False
-            i += 1
-            if not (128 <= data[i] < 144):  # not 1000 xxxx
-                return False
-            c = 2
+            c = 3
+            # if i >= length - 1:
+            #     return False
+            # i += 1
+            # if not (128 <= data[i] < 144):  # not 1000 xxxx
+            #     return False
+            # c = 2
         if data[i] >= 240:  # 1111 0xxx
             c = 3
         elif data[i] >= 224:  # 1110 xxxx
