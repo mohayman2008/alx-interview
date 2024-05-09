@@ -9,6 +9,8 @@ def validUTF8(data):
                                           for x in data)):
         return False
 
+    data = data.copy()
+
     i = 0
     length = len(data)
     while i < length:
