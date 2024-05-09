@@ -5,9 +5,9 @@
 def validUTF8(data):
     '''validUTF8: checks if a list of integers <data> represents a valid UTF-8
     encoding'''
-    # if not isinstance(data, list) or any((type(x) != int or x < 0
-    #                                       for x in data)):
-    if not isinstance(data, list):
+    # if not isinstance(data, list):
+    if not isinstance(data, list) or any((type(x) != int or x < 0
+                                          for x in data)):
         return False
 
     i = 0
@@ -54,4 +54,4 @@ def validUTF8(data):
     return True
 
 
-print(validUTF8([24, 241, 135, 128, 128, 0, 224, 129, 191, 12, 0]))
+# print(validUTF8([24, 241, 135, 128, 128, 0, 224, 129, 191, 12, 0]))
