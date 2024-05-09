@@ -5,8 +5,9 @@
 def validUTF8(data):
     '''validUTF8: checks if a list of integers <data> represents a valid UTF-8
     encoding'''
-    if not isinstance(data, list) or any((type(x) != int or x < 0
-                                          for x in data)):
+    # if not isinstance(data, list) or any((type(x) != int or x < 0
+    #                                       for x in data)):
+    if not isinstance(data, list):
         return False
 
     i = 0
