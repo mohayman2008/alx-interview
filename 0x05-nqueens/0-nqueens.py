@@ -16,19 +16,15 @@ def is_valid_Q(board, n, x, y):
     assert x < n
     assert y < n
 
-    for j in range(y, n):
-        if board[x][j]:
-            return False
-
     diff = y - x
     _sum = x + y
-    for i in range(n):
+    for i in range(x):
         d1_y = i + diff
-        if 0 <= d1_y < n and board[i][d1_y]:
+        if 0 <= d1_y and board[i][d1_y]:
             return False
 
         d2_y = _sum - i
-        if 0 <= d2_y < n and board[i][d2_y]:
+        if d2_y < n and board[i][d2_y]:
             return False
 
         if board[i][y]:
@@ -48,24 +44,21 @@ def get_q_cordinates(board, n, char="Q"):
     return res
 
 
-def nqueens(n, board=None, x=0, y=0, solutions=[]):
+def nqueens(n, board=None, x=0, solutions=[]):
     '''The function recursevely solves the N queens puzzle using backtracking
     '''
     if not board:
         board = [["" for j in range(n)] for i in range(n)]
 
-    valid_row = True
-    for i in range(x, n):
-        for j in range(n):
-            if is_valid_Q(board, n, i, j):
-                board[i][j] = "Q"
-                if x == n - 1:
-                    solution = get_q_cordinates(board, n)
-                    if len(solution) == n:
-                        solutions.append(solution)
-                else:
-                    nqueens(n, board, i + 1, 0, solutions)
-                board[i][j] = ""
+    if x >= n:
+        solutions.append(get_q_cordinates(board, n))
+        return
+
+    for y in range(n):
+        if is_valid_Q(board, n, x, y):
+            board[x][y] = "Q"
+            nqueens(n, board, x + 1, solutions)
+            board[x][y] = ""
     return solutions
 
 
