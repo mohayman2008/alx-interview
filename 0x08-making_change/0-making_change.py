@@ -9,8 +9,9 @@ def makeChange(coins, total):
         return 0
     if not len(coins):
         return -1
-
-    return calculateChange(coins.sort(reversed=True), total, {})
+    
+    coins.sort(reverse=True)
+    return calculateChange(coins, total, {})
 
 
 def calculateChange(coins, total, memo):
