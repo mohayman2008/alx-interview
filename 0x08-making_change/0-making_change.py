@@ -5,39 +5,25 @@
 def makeChange(coins, total):
     '''The function determines the fewest number of coins needed to meet a
     given amount "total", given a pile of "coins" of different values'''
-    if total <= 0:
-        return 0
-    if not len(coins):
+    if len(coins) == 0 or type(total) != int:
         return -1
+    if total < 1:
+        return 0
 
     coins.sort(reverse=True)
-    return calculateChange(coins, total, {})
 
+    minimums = [total + 1 for _ in range(total + 1)]
+    minimums[0] = 0
+    for i in range(1, total + 1):
+        for coin in coins:
+            if coin == i:
+                minimums[i] = 1
+            elif coin < i and minimums[i - coin] >= 0:
+                min_moves = 1 + minimums[i - coin]
+                if min_moves < minimums[i]:
+                    minimums[i] = min_moves
+        if minimums[i] > total:
+            minimums[i] = -1
 
-def calculateChange(coins, total, memo):
-    '''The function recursively determines the fewest number of coins needed
-    to meet a given amount "total", given a pile of "coins" of different values
-    '''
-    if total <= 0:
-        return 0
-
-    memoized = memo.get(total)
-    if memoized is not None:
-        return memoized
-
-    min_moves = total + 1
-    for coin in coins:
-        if coin == total:
-            memo[total] = 1
-            return 1
-        if coin > total:
-            break
-        rest_moves = calculateChange(coins, total - coin, memo)
-        if rest_moves >= 0 and rest_moves < min_moves:
-            min_moves = rest_moves + 1
-
-    if min_moves == total + 1:
-        min_moves = -1
-    memo[total] = min_moves
-
-    return min_moves
+    print(minimums)
+    return minimums[total]
