@@ -16,14 +16,11 @@ def makeChange(coins, total):
     minimums[0] = 0
     for i in range(1, total + 1):
         for coin in coins:
-            if coin == i:
-                minimums[i] = 1
-            elif coin < i and minimums[i - coin] >= 0:
+            if coin <= i and minimums[i - coin] >= 0:
                 min_moves = 1 + minimums[i - coin]
                 if min_moves < minimums[i]:
                     minimums[i] = min_moves
         if minimums[i] > total:
             minimums[i] = -1
 
-    print(minimums)
     return minimums[total]
