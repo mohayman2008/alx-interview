@@ -9,7 +9,7 @@ def makeChange(coins, total):
         return 0
     if not len(coins):
         return -1
-    
+
     coins.sort(reverse=True)
     return calculateChange(coins, total, {})
 
@@ -30,10 +30,11 @@ def calculateChange(coins, total, memo):
         if coin == total:
             memo[total] = 1
             return 1
-        if coin < total:
-            rest_moves = calculateChange(coins, total - coin, memo)
-            if rest_moves >= 0 and rest_moves < min_moves:
-                min_moves = rest_moves + 1
+        if coin > total:
+            break
+        rest_moves = calculateChange(coins, total - coin, memo)
+        if rest_moves >= 0 and rest_moves < min_moves:
+            min_moves = rest_moves + 1
 
     if min_moves == total + 1:
         min_moves = -1
